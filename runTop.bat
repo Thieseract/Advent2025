@@ -1,0 +1,1 @@
+start cmd /k php -f "C:\Users\Tim\Documents\coding\Advent2024\aoc.php"
