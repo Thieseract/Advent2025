@@ -53,7 +53,7 @@ function checkStepDirection($steps) {
 
 function evaluateLine($line) {
 
-  $steps = getSteps(explode(' ', $line));
+  $steps = getSteps($line);
   $lineIsGood = false;
   $goodLength = checkStepLength($steps);
 
@@ -68,15 +68,29 @@ function evaluateLine($line) {
   return $lineIsGood;
 }
 
-function linePermutations($line){
+function linePermutations($line) {
 
   $alternateLines = [];
+  $lineGood = false;
 
-  $lineArray = explode(' ', $line);
+  $size = sizeof($line);
 
-  foreach($lineArray as $digit){
-    
+  for ($i = 0; $i < $size; $i++) {
+
+    $alternateLines[$i] = $line;
+    unset($alternateLines[$i][$i]);
   }
+
+  foreach ($alternateLines as $altLine) {
+
+    $lineSafe = evaluateLine(array_values($altLine));
+    if ($lineSafe == true) {
+      $lineGood = true;
+      break;
+    }
+  }
+
+  return $lineGood;
 }
 
 function main($data) {
@@ -85,8 +99,13 @@ function main($data) {
 
   foreach ($data as $line) {
 
-    if (evaluateLine($line)) {
+    $lineData = explode(' ', $line);
+    if (evaluateLine($lineData)) {
       $safeLines += 1;
+    } else {
+      if (linePermutations($lineData)) {
+        $safeLines += 1;
+      }
     }
   }
 

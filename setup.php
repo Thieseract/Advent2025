@@ -27,3 +27,33 @@ function loadPuzzle($puzzle, $test) {
 
   return $retData;
 }
+
+function colorLog(string $str, string $type = 'i') {
+  $colors = [
+    'r' => 31, //error
+    'b' => 34, //success
+    'g' => 32, //warning
+    'w' => 97, //warning
+    'i' => 36  //info
+  ];
+  $color = $colors[$type] ?? 0;
+  echo "\033[" . $color . "m" . $str . "\033[0m";
+}
+
+function colorRow(string $str, string $type = 'i') {
+  $colors = [
+    'r' => 31, //error
+    'b' => 34, //success
+    'g' => 32, //warning
+    'w' => 97, //warning
+    'i' => 36  //info
+  ];
+  $color = $colors[$type] ?? 0;
+  return "\033[" . $color . "m" . $str . "\033[0m";
+}
+
+function clearTerminal() {
+
+  //echo "\e[H\e[J";
+  echo "\e[H";
+}
