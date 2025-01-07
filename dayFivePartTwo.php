@@ -49,9 +49,25 @@ function loadPuzzleDay5($puzzle) {
     }
   }
 
+  function reOrder($rule, $set){
+
+    $firstKey = array_search($rule[0], $set);
+    $secondKey = array_search($rule[1], $set);
+
+    //echo $firstKey . '; ' . $secondKey . PHP_EOL;
+    if ($firstKey < $secondKey){
+        return true;
+    } else {
+      $set[$firstKey] = $rule[1];
+      $set[$secondKey] = $rule[0];
+      return $set;
+    }
+  }
+
   function getGoodSets($rules, $sets){
 
     $goodSets = [];
+    $badSets = [];
 
     foreach($sets as $set){
 
@@ -59,10 +75,12 @@ function loadPuzzleDay5($puzzle) {
         $results = checkRules($rules, $setData);
         if($results){
             $goodSets[] = $results;
+        } else {
+          $badSets[] = $set;
         }
     }
 
-    return $goodSets;
+    return $badSets;
   }
 
   function addGoodSets($sets){
@@ -87,7 +105,7 @@ function main($data) {
 
     $data = loadPuzzleDay5('dayFive');
 
-    $useTestData = false;
+    $useTestData = true;
 
     if($useTestData){
         $puzzleData = $data[1];
@@ -98,7 +116,19 @@ function main($data) {
     $puzzleRules = explode(PHP_EOL, $puzzleData[0]);
     $puzzleSets = explode(PHP_EOL, $puzzleData[1]);
 
-    $setsToAdd = getGoodSets($puzzleRules, $puzzleSets);
+    $badSets = getGoodSets($puzzleRules, $puzzleSets);
+    print_r($badSets);
 
-    addGoodSets($setsToAdd);
+    //$set = explode(',', $badSets);
+
+    foreach($badSets as $set){
+      foreach($puzzleRules as $rule){
+        $re = reOrder($rule, $set);
+      print_r($re);
+      break;
+      }
+      
+    }
+
+    //addGoodSets($setsToAdd);
 }
