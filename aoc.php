@@ -2,11 +2,14 @@
 
 declare(strict_types=1);
 
-require_once('setup.php');
+require_once('AdventEight.php');
 
-$activePuzzle = ['Five', 'Two'];
-$useTestData = false;
+// $activePuzzle = ['Six', 'One'];
+// $useTestData = true;
 
-$puzzleData = loadPuzzle($activePuzzle, $useTestData);
+// $puzzleData = loadPuzzle($activePuzzle, $useTestData);
 
-main($puzzleData);
+// main($puzzleData);
+
+$aoc = new AdventEight();
+$aoc->partOne();
