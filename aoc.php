@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once('AdventEight.php');
+require_once('AdventNine.php');
 
 // $activePuzzle = ['Six', 'One'];
 // $useTestData = true;
@@ -11,5 +11,5 @@ require_once('AdventEight.php');
 
 // main($puzzleData);
 
-$aoc = new AdventEight();
+$aoc = new AdventNine();
 $aoc->partOne();
